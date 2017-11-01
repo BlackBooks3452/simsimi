@@ -6,18 +6,14 @@ And Modified by Farzain - zFz ( Faraaz )
 2017
 */
 require_once('./line_class.php');
-
-$channelAccessToken = 'ACCESS TOKEN ENTE'; //Your Channel Access Token
-$channelSecret = 'SECRET TOKEN ENTE';//Your Channel Secret
-
+$channelAccessToken = 'eOx9PznT9lByExy6DXs58/J8oXcmghdIrhf1xjE2xEgH9/jJyKr79rkAg8UzpUiMXpQfCF9ayWLc6Nh+NMFeXyIn23xwXsBp+Xbb641UoKWXdkPtBthJMuvYLnNBi+EVszU5Ik04+tFJsuOb+rUx4QdB04t89/1O/w1cDnyilFU='; //Your Channel Access Token
+$channelSecret = 'fe6a97c80f522c351dd6b7c11f11f61e';//Your Channel Secret
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
-
 $userId 	= $client->parseEvents()[0]['source']['userId'];
 $replyToken = $client->parseEvents()[0]['replyToken'];
 $message 	= $client->parseEvents()[0]['message'];
 $profil = $client->profil($userId);
 $pesan_datang = $message['text'];
-
 if($message['type']=='sticker')
 {	
 	$balas = array(
@@ -35,7 +31,7 @@ if($message['type']=='sticker')
 }
 else
 $pesan=str_replace(" ", "%20", $pesan_datang);
-$key = 'API KEY SIMSIMI ENTE'; //API SimSimi
+$key = '453e8070-ab12-491a-ad66-f9fc9038b2d9'; //API SimSimi
 $url = 'http://sandbox.api.simsimi.com/request.p?key='.$key.'&lc=id&ft=1.0&text='.$pesan;
 $json_data = file_get_contents($url);
 $url=json_decode($json_data,1);
@@ -89,8 +85,5 @@ if($url['result'] != 100)
 }
  
 $result =  json_encode($balas);
-
 file_put_contents('./reply.json',$result);
-
-
 $client->replyMessage($balas);
